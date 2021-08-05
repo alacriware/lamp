@@ -1,10 +1,5 @@
 var globalPrefix
 var operators
-try {
-    operators = require('../config/config.json').operators
-} catch {
-    operators = process.env.DEVBOT_OPERATORS.split(',')
-}
 const mongo = require('../utils/mongo');
 const commandPrefixSchema = require('../schemas/command-prefix-schema')
 const guildPrefixes = {} // Guild {'guildId'}
@@ -122,6 +117,7 @@ module.exports.listen = (client) => {
 
       // Remove the command which is the first index
       const name = arguments.shift().toLowerCase()
+
       const botMention = `<@!${client.user.id}>`
       if (name.startsWith(prefix) || name === botMention) {
           let command
@@ -134,28 +130,28 @@ module.exports.listen = (client) => {
           if(name.startsWith(botMention))
           {
 
-            commandName = arguments.shift() //mention is the first index, not a prefix, so remove it and then command
+            commandName = arguments.shift() // Mention is the first index, not a prefix, so remove it to get the command
             command = allCommands[commandName]
           }
           if (!command) {
               return
           }
           let {
-              commands,
-              miniDescription, 
-              description,
-              usage,
-              enabled = true,
-              exampleUsage = [],
-              minArgs = 0,
-              maxArgs = null,
-              listed = true,
-              operatorOnly = false,
-              permissions = [],
-              permissionError = 'You do not have permission to execute this command.',
-              dmsEnabled = false,
-              dmsOnly = false,
-              callback,
+              commands, // Command aliases
+              miniDescription, // Small description for listed commands
+              description, // Full description for specific command help
+              usage, // Command formatting and syntax
+              enabled = true, // Whether or not the command should be able to run or not
+              exampleUsage = [], // A full example usage of the command
+              minArgs = 0, // Minimum amount of arguments expected
+              maxArgs = null, // Maximum amount of arguments expected
+              listed = true, // Whether or not the command is listed when running the help command without specifying a command
+              operatorOnly = false, // Whether or not the command is for bot operators only
+              permissions = [], // The required Discord permissions to run the command
+              permissionError = 'You do not have permission to execute this command.', // What message is shown to the user if they do not have the correct permissions to run the command
+              dmsEnabled = false, // Whether or not the command can be used in direct messaging
+              dmsOnly = false, // Whether or not the command is for direct messages *only*
+              callback, // Main command functionality
           } = command  
 
           if(enabled === false)
