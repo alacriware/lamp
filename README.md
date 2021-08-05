@@ -7,4 +7,4 @@ lamp provides a feature-rich command handler which automatically imports command
 lamp provides some ready-for-production listeners to run at different events, using simplified format of a command file. an example is the message listener, features can be created to run when a message is sent, such as a text filter. 
 
 ## installation
-as of writing this, there is no official, pure release of lamp. the lamp framework was created (and actively being updated) in the [https://github.com/alacriware/devbot](devbot) repository. in the future, official releases will be provided.
+the lamp source code is currently a fork of the devbot source code, with few changes. changes to lamp will likely be made in the devbot repository and merged here regularly. if you're eager to use lamp, you'll need to manually add the required files to your project.
