@@ -1,4 +1,5 @@
 const allJoinListeners = []
+
   module.exports = (callback) => {
        allJoinListeners.push(callback)
        console.log("Registered new join listener.")
